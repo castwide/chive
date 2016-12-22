@@ -1,3 +1,38 @@
 = Chive
 
-This project rocks and uses MIT-LICENSE.
+A mountable blog engine for Rails.
+
+== Installation
+
+Add chive and will_paginate to your Gemfile:
+
+    gem 'chive'
+    gem 'will_paginate'
+
+Run the migrations:
+
+    $ rails chive:install:migrations
+    $ rake db:migrate
+
+Add the Chive engine to config/routes.rb:
+
+    mount Chive::Engine, at: "/blog"
+
+== Configuration
+
+See config/initializers/chive.rb for configuration options.
+
+== Editing Views
+
+Chive provides a generator for copying its views to your Rails app:
+
+    $ rails generate chive:views
+
+== Administration
+
+The simplest option for administration is to add the chive_admin gem to your
+project.
+
+Chive is designed to be as simple and as modular as possible, so chive_admin
+is not required. You can build your own control panel or integrate Chive into
+an existing one instead.
