@@ -4,7 +4,7 @@ module Chive
   class ArticlesController < ApplicationController
 
     def index
-      @articles = Article.where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL)', DateTime.now, DateTime.now).order(published_at: :desc)
+      @articles = Article.where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL)', DateTime.now, DateTime.now).order(published_at: :desc).paginate(page: params[:page])
     end
 
     def show

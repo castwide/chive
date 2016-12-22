@@ -1,5 +1,6 @@
 module Chive
   class Article < ActiveRecord::Base
+    self.per_page = 10
     belongs_to :author, class_name: 'User'
     
     after_initialize :set_default_autosummary, :if => :new_record?
