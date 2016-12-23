@@ -1,13 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= raw @article.body %>
-</p>
-
-<%= link_to 'Back', articles_path %>
+<section>
+  <article>
+    <h1><%= @article.title %></h1>
+    <address>by <%= @article.byline %> on <%= @article.published_at %></address>
+    <%= raw @article.body %>
+  </article>
+</section>
