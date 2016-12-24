@@ -1,0 +1,9 @@
+<% if article_list.length > 0 %>
+  <ul>
+    <% article_list.each do |article| %>
+      <li>
+        <%= link_to article.title, Chive::Engine.routes.url_helpers.article_path(article) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
