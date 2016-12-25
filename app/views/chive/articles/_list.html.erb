@@ -2,7 +2,7 @@
   <ul>
     <% article_list.each do |article| %>
       <li>
-        <%= link_to article.title, Chive::Engine.routes.url_helpers.article_path(article) %>
+        <%= link_to article.title, chive.article_path(article) %>
       </li>
     <% end %>
   </ul>
