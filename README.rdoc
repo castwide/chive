@@ -2,11 +2,20 @@
 
 A mountable blog engine for Rails.
 
+*This project is still in early development.*
+
+== Features
+
+* Configurable publication and expiration dates
+* Paginated archives
+* Automated article summaries
+* RSS feed
+
 == Installation
 
 Add chive and will_paginate to your Gemfile:
 
-    gem 'chive'
+    gem 'chive', git: 'https://github.com/castwide/chive'
     gem 'will_paginate'
 
 Run the migrations:
