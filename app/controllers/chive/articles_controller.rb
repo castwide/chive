@@ -11,5 +11,11 @@ module Chive
       @article = Article.find_by(slug: params[:slug])
     end
 
+    def feed
+      @articles = Article.where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL)', DateTime.now, DateTime.now).order(published_at: :desc).limit(Chive.per_page)
+      respond_to do |format|
+        format.rss { render layout: false }
+      end
+    end
   end
 end
