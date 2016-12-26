@@ -31,6 +31,12 @@ Add the Chive engine to config/routes.rb:
 
 See config/initializers/chive.rb for configuration options.
 
+== Adding an RSS Feed
+
+Add the feed to config/routes.rb:
+
+    get '/rss' => 'chive/articles#feed', defaults: { format: 'rss' }
+
 == Editing Views
 
 Chive provides a generator for copying its views to your Rails app:
