@@ -4,11 +4,14 @@ module Chive
   class ArticlesController < ApplicationController
 
     def index
-      @articles = Article.where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL)', DateTime.now, DateTime.now).order(published_at: :desc).paginate(page: params[:page], per_page: Chive.per_page)
+      @articles = Article
+        .where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL)', DateTime.now, DateTime.now).order(published_at: :desc)
+        .paginate(page: params[:page], per_page: Chive.per_page)
     end
 
     def show
       @article = Article.find_by(slug: params[:slug])
+      raise ActionController::RoutingError, 'Not Found' if @article.nil?
     end
 
     def feed

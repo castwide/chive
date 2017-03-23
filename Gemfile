@@ -13,6 +13,8 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem 'rdoc'
+
 gem 'will_paginate', '~> 3.1.0'
 gem 'ckeditor'
 gem 'paperclip'
