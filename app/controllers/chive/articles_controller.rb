@@ -5,7 +5,7 @@ module Chive
 
     def index
       @articles = Article
-        .where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL)', DateTime.now, DateTime.now).order(published_at: :desc)
+        .where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL) AND status = ?', DateTime.now, DateTime.now, 'publish').order(published_at: :desc)
         .paginate(page: params[:page], per_page: Chive.per_page)
     end
 

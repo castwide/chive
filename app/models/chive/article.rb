@@ -3,9 +3,11 @@ module Chive
     self.per_page = 10
     belongs_to :author, class_name: 'User'
     
+    #enum status: [:draft, :publish]
+
     after_initialize :set_default_autosummary, :if => :new_record?
     before_save :set_published_at, :set_slug, :generate_summary
-    
+
     def to_param
       slug
     end
