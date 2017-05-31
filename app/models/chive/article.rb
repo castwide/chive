@@ -2,8 +2,10 @@ module Chive
   class Article < ActiveRecord::Base
     self.per_page = 10
     belongs_to :author, class_name: 'User'
-    
+
     #enum status: [:draft, :publish]
+
+    acts_as_taggable
 
     after_initialize :set_default_autosummary, :if => :new_record?
     before_save :set_published_at, :set_slug, :generate_summary
@@ -11,11 +13,11 @@ module Chive
     def to_param
       slug
     end
-    
+
     def byline
       custom_byline || author.email
     end
-    
+
     private
     def set_default_autosummary
       self.autosummary = Chive.default_autosummary || false
