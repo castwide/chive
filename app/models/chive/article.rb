@@ -2,6 +2,8 @@ module Chive
   class Article < ActiveRecord::Base
     self.per_page = 10
     belongs_to :author, class_name: 'User'
+    has_attached_file :image
+    validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
     #enum status: [:draft, :publish]
 
