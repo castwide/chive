@@ -2,91 +2,168 @@
 
 A mountable blog engine for Rails.
 
-*This project is still in early development.*
+## Quick Start
 
-## Features
+Add this line to your application's Gemfile:
 
-* Configurable publication and expiration dates
-* Paginated archives
-* Automated article summaries
-* RSS feed
+    ```bash
+    gem 'chive'
+    ```
 
-## Installation
+Run the rake task for a complete installation:
 
-Add chive to your Gemfile:
+    ```bash
+    $ rake chive:complete
+    ```
 
-    gem 'chive', git: 'https://github.com/castwide/chive'
+The complete installation includes Devise for user authentication. Alternatively, you can run `rake chive:install` to get the minimum requirements without Devise.
 
-Run the migrations:
+Next, run the database migrations:
 
-    $ rails chive:install:migrations
+    ```bash
     $ rake db:migrate
+    ```
 
-Add the Chive engine to config/routes.rb:
+If you installed with `rake:complete`, you can seed the database with an example user and article:
 
-    mount Chive::Engine, at: "/blog"
+    ```bash
+    $ rake db:seed
+    ```
 
-## Configuration
+Start the server:
 
-See config/initializers/chive.rb for configuration options.
+    ```bash
+    $ rails s
+    ```
 
-## Adding an RSS Feed
+Browse to `http://localhost:3000/chive`. You should see the article index page.
 
-Add the feed to config/routes.rb:
+If you installed with `rake:complete`, go to `http://localhost:3000/users/sign_in` and log in with email `example@example.com` and password `password`.
 
-    get '/rss' => 'chive/articles#feed', defaults: { format: 'rss' }
+If you don't have user authentication configured, you'll still be able to test the admin features in development mode. For security purposes, you're required to supply an authentication implementation for the admin pages to work in production.
 
-## Editing Views
+## Custom Setup
 
-Chive provides a generator for copying its views to your Rails app:
+If you want to customize Chive or to integrate it into an existing app, you can follow these steps to get it working.
 
-    $ rails generate chive:views
+### Add the gem dependencies to the Gemfile
 
-This will add the following views to your app:
+Install the minimum dependencies:
 
-* chive/articles/index.html.erb   - The blog's home page
-* chive/articles/show.html.erb    - The view for individual articles
-* chive/articles/feed.rss.builder - The RSS feed
-* chive/articles/_list.html.erb   - A brief article listing
+  ```bash
+  $ rails g chive:dependencies
+  $ bundle install
+  ```
 
-## Adding a List of Articles to Views
+### Install and configure CKEditor
 
-There are two basic ways to include a list of articles in your views and
-layouts.
+The default:
 
-### 1. The List Partial
+```bash
+$ rails g chive:ckeditor
+$ rake active_storage:install
+```
 
-Add the list partial to any view with the render method:
+The default CKEditor configuration uses ActiveRecord and ActiveStorage to store images and attachments. You can select different options by running `rails g ckeditor:install` instead. See the [CKEditor gem](https://github.com/galetahub/ckeditor) for more information.
 
-    render partial: 'chive/articles/list'
-    
-See "Editing Views" above to customize the list.
+To use Chive's default authorization for uploading files through CKEditor, add this line to `config/initializers/ckeditor.rb`:
 
-### 2. The article_list Helper Method
+```ruby
+config.authorize_with :chive
+```
 
-You can also code your own listings into any view with the article_list method.
-Here's a simple example:
+### Generate the initializer
 
-    <% article_list.each do |article| %>
-      <p>
-        Title: <%= article.title %><br/>
-        Link: <%= link_to article_path(article) %>
-      </p>
-    <% end %>
+```bash
+rails g chive:initializer
+```
 
-#### article_list Arguments
+### Install the migrations
 
-##### Limit
+```bash
+rake chive:install:migrations
+rake acts_as_taggable_on_engine:install:migrations
+```
 
-The maximum number of articles to select. Example:
+### Users
 
-    article_list(limit: 5)
+Chive requires a users table for authors. The default installation uses [Devise](https://github.com/heartcombo/devise). To install Devise with Chive's defaults:
 
-## Administration
+```bash
+rails g chive:devise
+```
 
-The simplest option for administration is to add the chive_admin gem to your
-project.
+If you want to use an existing Devise setup or an alternative user system, update `config/initializers/chive.rb` to point to your user model. Note that Chive requires the user model to include a `name` attribute.
 
-Chive is designed to be as simple and as modular as possible, so chive_admin
-is not required. You can build your own control panel or integrate Chive into
-an existing one instead.
+### Authentication
+
+If you're using Devise you can get quick and easy authentication with the `use_devise` option in `config/initializers/chive.rb`:
+
+```ruby
+config.use_devise = true
+```
+
+To customize authentication, you'll need to modify the controllers. Add them to your `app/controllers` directory:
+
+```bash
+rails g chive:controllers
+```
+
+### Mounting the engines
+
+The default routes in `config/routes.rb`:
+
+```ruby
+Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+  mount Chive::Engine => "/chive"
+
+  # ...etc.
+end
+```
+
+You can make the blog your home page by changing the `Chive::Engine` path to `/`:
+
+```ruby
+mount Chive::Engine => "/"
+```
+
+## Customizing the Layout
+
+There are a few different options for modifying the look and feel of Chive pages.
+
+The `config.public_layout` setting in `config/initializers/chive.rb` lets you change the layout used by public pages (i.e., `Chive::Articles#index` and `Chive::Articles#show`). This is useful for applying your own style to the main site while still using the standard admin pages for content management.
+
+To modify the views, add them to your `app/views` directory:
+
+```bash
+rails generate chive:views
+```
+
+## Creating Your Own Resource
+
+Another option for customizing your blog is to create a custom resource.
+
+Make your own controller, e.g., `apps/controller/blog_controller.rb`:
+
+```ruby
+class BlogController < Chive::ArticlesController
+  layout 'application'
+end
+```
+
+The `layout` call makes your controller use your `app/views/layout/application` layout instead of the engine's.
+
+Add a new path to `config/routes.rb`:
+
+```ruby
+Rails.application.routes.draw do
+  # ...
+  resources :blog, path: '/blog', controller: 'blog', only: [:index, :show]
+  # ...
+end
+```
+
+The `only: [:index, :show]` option limits the resource to the public pages.
+
+Now you can make your own views at `app/views/blog/index.html.erb` and `app/views/blog/show.html.erb`.

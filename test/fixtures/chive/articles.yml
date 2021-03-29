@@ -1,9 +1,25 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
   title: MyString
   body: MyText
+  slug: MyString
+  custom_byline: MyString
+  summary: MyText
+  autosummary: false
+  author_id: 1
+  status: MyString
+  published_at: 2021-03-27 05:27:16
+  expired_at: 2021-03-27 05:27:16
 
 two:
   title: MyString
   body: MyText
+  slug: MyString
+  custom_byline: MyString
+  summary: MyText
+  autosummary: false
+  author_id: 1
+  status: MyString
+  published_at: 2021-03-27 05:27:16
+  expired_at: 2021-03-27 05:27:16

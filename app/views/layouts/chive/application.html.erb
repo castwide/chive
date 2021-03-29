@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chive</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= javascript_include_tag "chive/application" %>
+  <%= stylesheet_link_tag    "chive/application", media: "all" %>
+</head>
+  <body>
+    <header id="header">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <h1 class="header-title"><%= link_to 'Chive', articles_path, class: 'header-link align-middle' %></h1>
+          </div>
+          <nav class="header-nav col">
+            <%= render "layouts/chive/userbox" %>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <%= render partial: 'layouts/chive/flash' %>
+
+    <main id="main" class="container">
+      <%= yield %>
+    </main>
+
+    <footer class="container">
+      <small>Powered by Chive</small>
+    </footer>
+  </body>
+</html>

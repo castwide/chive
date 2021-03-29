@@ -1,25 +1,33 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path("lib", __dir__)
 
 # Maintain your gem's version:
 require "chive/version"
 
 # Describe your gem and declare its dependencies:
-Gem::Specification.new do |s|
-  s.name        = "chive"
-  s.version     = Chive::VERSION
-  s.authors     = ["Fred Snyder"]
-  s.email       = ["fsnyder@castwide.com"]
-  s.homepage    = "http://castwide.com"
-  s.summary     = "Mountable article engine"
-  s.description = "A mountable engine for blogging and article publishing."
-  s.license     = "MIT"
+Gem::Specification.new do |spec|
+  spec.name        = "chive"
+  spec.version     = Chive::VERSION
+  spec.authors     = ["Fred Snyder"]
+  spec.email       = ["fsnyder@castwide.com"]
+  spec.homepage    = "https://castwide.com"
+  spec.summary     = "Blog plugin for Rails"
+  spec.description = "Blog plugin for Rails"
+  spec.license     = "MIT"
 
-  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["test/**/*"]
+  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
+  # to allow pushing to a single host or delete this section to allow pushing to any host.
+  if spec.respond_to?(:metadata)
+    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  else
+    raise "RubyGems 2.0 or newer is required to protect against " \
+      "public gem pushes."
+  end
 
-  s.add_dependency "rails", "~> 4.2", ">= 4.2.6"
-  s.add_dependency 'will_paginate', '~> 3.1.0'
-  s.add_dependency 'acts-as-taggable-on'
+  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  s.add_development_dependency "sqlite3", "~> 1.3"
+  spec.add_dependency 'acts-as-taggable-on', '~> 7.0'
+  spec.add_dependency 'ckeditor'
+  spec.add_dependency "rails", "~> 6.0.3", ">= 6.0.3.6"
+
+  spec.add_development_dependency "sqlite3"
 end

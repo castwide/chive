@@ -1,43 +1,36 @@
 module Chive
-  class Article < ActiveRecord::Base
-    self.per_page = 10
-    belongs_to :author, class_name: 'User'
-    has_attached_file :image
-    validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+  class Article < ApplicationRecord
+    belongs_to :author, class_name: Chive.user_model, primary_key: Chive.user_pk_attr,
+                        foreign_key: :author_id, required: false
 
-    #enum status: [:draft, :publish]
+    has_one_attached :image
 
-    acts_as_taggable
-
-    after_initialize :set_default_autosummary, :if => :new_record?
-    before_save :set_published_at, :set_slug, :generate_summary
-
-    def to_param
-      slug
-    end
+    acts_as_taggable_on :tags
 
     def byline
-      custom_byline || author.email
+      return custom_byline if custom_byline.present?
+      return real_author_name if real_author_name.present?
+      Chive.anonymous_name
     end
 
-    private
-    def set_default_autosummary
-      self.autosummary = Chive.default_autosummary || false
+    def real_author_name
+      author.present? && author.send(Chive.user_name_attr)
     end
-    def set_published_at
-      self.published_at = DateTime.now if self.published_at.nil?
+
+    def expired?
+      expired_at && expired_at <= DateTime.now
     end
-    def set_slug
-      # TODO Slugs need to be unique
-      self.slug = self.title.parameterize if self.slug.nil?
+
+    def published?
     end
-    def generate_summary
-      if self.autosummary?
-        html = Nokogiri::HTML(self.body)
-        para = html.css('p').first
-        puts para
-        self.summary = para.inner_html
-      end
+
+    def self.latest
+      self.order(published_at: :desc, created_at: :desc)
+    end
+
+    def self.latest_published
+      now = DateTime.now
+      latest.where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL) AND status = ?', now, now, 'publish')
     end
   end
 end

@@ -1,7 +1,35 @@
 module Chive
   module ApplicationHelper
-    def article_list limit: 10, partial: 'chive/articles/list'
-      Article.where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL) AND status = ?', DateTime.now, DateTime.now, 'publish').order(published_at: :desc).limit(limit)
+    def chive_user
+      send("current_#{Chive.user_model.underscore}") if Chive.use_devise?
+    end
+
+    # Needed to fix polymorphic_mappings.
+    # @see https://github.com/rails/rails/issues/31325#issuecomment-560135329
+    def method_missing(method, *args, &block)
+      if method.to_s.end_with?("_path", "_url")
+        if main_app.respond_to?(method)
+          main_app.send(method, *args)
+        else
+          super
+        end
+      else
+        super
+      end
+    end
+
+    # Needed to fix polymorphic_mappings.
+    # @see https://github.com/rails/rails/issues/31325#issuecomment-560135329
+    def respond_to?(method)
+      if method.to_s.end_with?("_path", "_url")
+        if main_app.respond_to?(method)
+          true
+        else
+          super
+        end
+      else
+        super
+      end
     end
   end
 end

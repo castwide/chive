@@ -1,0 +1,16 @@
+<% if Chive.use_devise? %>
+  <% if chive_user %>
+    <div>
+      <span>Signed in as <%= chive_user.send(Chive.user_name_attr.underscore) %></span>
+    </div>
+    <div>
+      <%= link_to 'Sign Out', send("destroy_#{Chive.user_model.underscore}_session_path"), method: :delete, class: 'header-link align-middle' %>
+    </div>
+  <% else %>
+    <%= link_to 'Sign In', send("new_#{Chive.user_model.underscore}_session_path"), class: 'header-link' %>
+  <% end %>
+<% elsif Rails.env.development? %>
+  <div>
+    <span class="badge badge-warning">DEV MODE: NO AUTHENTICATION</span>
+  </div>
+<% end %>

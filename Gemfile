@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Declare your gem's dependencies in chive.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -13,9 +14,12 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
-gem 'rdoc'
+# gem 'sass-rails'
+# gem 'bulma-rails'
 
-gem 'will_paginate', '~> 3.1.0'
-gem 'ckeditor'
-gem 'paperclip'
 gem 'acts-as-taggable-on'
+gem 'bootstrap'
+gem 'ckeditor'
+gem 'jquery-rails'
+gem 'mini_magick'
+gem 'will_paginate'

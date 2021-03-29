@@ -1,0 +1,82 @@
+@import "bootstrap";
+@import "./pagination";
+
+#header {
+  background-color: #f2efe9;
+  color: #543d37;
+  padding: 0.2rem 0;
+  margin-bottom: 2em;
+
+  .header-title {
+    font-size: 180%;
+  }  
+}
+
+.flash {
+  text-align: center;
+  margin-top: -2em;
+  margin-bottom: 2em;
+}
+
+.header-nav {
+  text-align: right;
+
+  .btn {
+    margin-left: 0.5em;
+  }
+}
+
+#footer {
+  padding-top: 1em;
+}
+
+.btn.btn-primary, .btn.btn-outline-primary {
+  min-width: 5rem;
+}
+
+.image-upload-fields img {
+  max-width: 240px;
+  max-height: 240px;
+}
+
+.image-previews {
+  width: 250px;
+  height: 250px;
+
+  .image-container {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background-color: #FFF;
+    text-align: center;
+  }
+
+  .delete-image, .delete-preview {
+    position: absolute;
+    margin-left: 230px;
+    margin-top: -10px;
+    width: 32px;
+    height: 32px;
+    background-image: image-url("chive/icon-delete.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+
+    input {
+      visibility: hidden;
+    }
+  
+  }
+
+  .delete-image {
+    z-index: 98;
+  }
+
+  .delete-preview {
+    z-index: 198;
+  }
+
+  .delete-image.checked {
+    background-image: image-url("chive/icon-undo.png");
+  }
+}

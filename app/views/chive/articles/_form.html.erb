@@ -1,0 +1,109 @@
+<%= javascript_include_tag Ckeditor.cdn_url %>
+
+<%= form_for @article, html: { multipart: true } do |f| %>
+  <div class="row">
+    <div class="col">
+      <h1><%= params[:action].capitalize %> Article</h1>
+    </div>
+    <nav class="col header-nav">
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
+      <%= link_to 'Cancel', articles_path, class: 'btn btn-secondary' %>
+      <% if params[:action] == 'edit' %>
+        <%= link_to "Delete", '#', class: 'btn btn-outline-danger', data: { toggle: 'modal', target: '#delete-modal' } %>
+        <%= render partial: 'delete_modal' %>
+      <% end %>
+    </nav>
+  </div>
+  <% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@article.errors.count, "error") %> errors prohibited this article from being saved:</h2>
+      <ul>
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="form-group">
+        <%= f.label :body %>
+        <%= f.cktext_area :body, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group image-upload-fields">
+        <%= f.label :image %>
+        <div class="image-previews">
+          <div class="image-container">
+            <%= image_tag 'chive/no-image', class: 'align-middle' %>
+          </div>
+          <div>
+            <% if @article.image.attached? %>
+              <div class="image-container">
+                <%= image_tag @article.image.variant(resize: '250x250'), class: 'attached-image' if @article.image.attached? %>
+              </div>
+              <label class="delete-image">
+                <%= check_box_tag :delete_image, @article.image.id, false %>
+              </label>
+            <% end %>
+          </div>
+          <div>
+            <div class="image-container">
+              <%= image_tag 'chive/blank', class: 'image-preview' %>
+            </div>
+            <label class="delete-preview">
+              <%= check_box_tag :delete_preview, 'delete', false %>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="custom-file">
+              <%= f.file_field :image, class: 'image-upload custom-file-input', data: {preview: '.image-preview', delete: '.delete-preview' } %>
+              <%= f.label :image, 'Choose file', class: 'custom-file-label' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :tag_list, 'Tags' %><br>
+        <%= f.text_field :tag_list, value: @article.tag_list.to_s, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <div class="form-group">
+          <%= f.label :summary %><br>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :autosummary, class: 'checkbox' %>
+              Use automatic summary
+            </label>
+          </div>
+          <%= f.text_area :summary, class: 'form-control' %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :custom_byline, 'Byline' %>
+        <%= f.text_field :custom_byline, class: 'form-control', placeholder: @article.author ? @article.author.name : chive_user ? chive_user.name : 'Anonymous' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-4">
+      <%= f.label :status %>
+      <%= f.select :status, [['Publish', :publish], ['Draft', :draft]], {}, {class: 'form-control'} %>
+    </div>
+    <div class="form-group col-sm-4">
+      <%= f.label :published_at, 'Publish Date' %>
+      <%= f.date_field :published_at, class: 'form-control datepicker-field' %>
+    </div>
+    <div class="form-group col-sm-4">
+      <%= f.label :exipred_at, 'Expire Date' %>
+      <%= f.date_field :expired_at, class: 'form-control datepicker-field' %>
+    </div>
+  </div>
+<% end %>
