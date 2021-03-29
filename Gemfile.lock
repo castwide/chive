@@ -3,8 +3,12 @@ PATH
   specs:
     chive (0.1.0)
       acts-as-taggable-on (~> 7.0)
-      ckeditor
+      bootstrap (~> 4.6)
+      ckeditor (~> 5.1)
+      jquery-rails (~> 4.3)
+      mini_magick (~> 4.11)
       rails (~> 6.0.3, >= 6.0.3.6)
+      will_paginate (~> 3.3)
 
 GEM
   remote: https://rubygems.org/
@@ -170,14 +174,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  acts-as-taggable-on
-  bootstrap
   chive!
-  ckeditor
-  jquery-rails
-  mini_magick
   sqlite3
-  will_paginate
 
 BUNDLED WITH
    2.2.0

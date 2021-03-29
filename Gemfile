@@ -16,10 +16,3 @@ gemspec
 
 # gem 'sass-rails'
 # gem 'bulma-rails'
-
-gem 'acts-as-taggable-on'
-gem 'bootstrap'
-gem 'ckeditor'
-gem 'jquery-rails'
-gem 'mini_magick'
-gem 'will_paginate'
