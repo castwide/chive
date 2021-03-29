@@ -1,7 +1,9 @@
 <section>
   <article>
     <div class="row">
-      <%= image_tag @article.image.variant(resize: '240x240'), class: 'float-left' if @article.image.attached? %>
+      <div class="float-left">
+        <%= image_tag @article.image.variant(resize: '250x250') if @article.image.attached? %>
+      </div>
       <div class="col">
         <h1><%= @article.title %></h1>
         <address>by <%= @article.byline %> on <%= @article.published_at %></address>
@@ -17,7 +19,9 @@
         <% end %>
       </nav>
     </div>
-    <%= raw @article.body %>
+    <div class="row">
+      <%= raw @article.body %>
+    </div>
   </article>
 </section>
 
