@@ -1,5 +1,12 @@
 <section>
   <article>
+    <nav class="header-nav float-right">
+      <% if user_can_chive? %>
+        <%= link_to "Edit", edit_article_path(@article), class: 'btn btn-outline-primary' %>
+        <%= link_to "Delete", '#', class: 'btn btn-outline-danger', data: { toggle: 'modal', target: '#delete-modal' } %>
+        <%= render partial: 'delete_modal' %>
+      <% end %>
+    </nav>
     <div class="row">
       <div class="float-left">
         <%= image_tag @article.image.variant(resize: '250x250') if @article.image.attached? %>
@@ -11,13 +18,6 @@
           <small><%= @article.tag_list.to_s %></small>
         </p>
       </div>
-      <nav class="col header-nav">
-        <% if user_can_chive? %>
-          <%= link_to "Edit", edit_article_path(@article), class: 'btn btn-outline-primary' %>
-          <%= link_to "Delete", '#', class: 'btn btn-outline-danger', data: { toggle: 'modal', target: '#delete-modal' } %>
-          <%= render partial: 'delete_modal' %>
-        <% end %>
-      </nav>
     </div>
     <div class="row">
       <%= raw @article.body %>
