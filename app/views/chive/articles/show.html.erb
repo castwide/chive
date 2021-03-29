@@ -5,6 +5,9 @@
       <div class="col">
         <h1><%= @article.title %></h1>
         <address>by <%= @article.byline %> on <%= @article.published_at %></address>
+        <p>
+          <small><%= @article.tag_list.to_s %></small>
+        </p>
       </div>
       <nav class="col header-nav">
         <% if user_can_chive? %>
@@ -14,9 +17,6 @@
         <% end %>
       </nav>
     </div>
-    <p>
-      <small><%= @article.tag_list.to_s %></small>
-    </p>
     <%= raw @article.body %>
   </article>
 </section>
