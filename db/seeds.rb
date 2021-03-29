@@ -16,6 +16,6 @@ if Rails.env.development?
     ),
     author: user,
     status: 'published',
-    published_at: DateTime.today
+    published_at: DateTime.now
   )
 end
