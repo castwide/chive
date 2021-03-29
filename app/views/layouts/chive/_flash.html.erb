@@ -1,5 +1,5 @@
 <% unless flash.empty? %>
-    <div class="flash alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
         <% flash.each do |type, msg| %>
             <div class="container <%= type %>">
                 <%= msg %>
