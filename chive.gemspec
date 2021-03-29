@@ -26,8 +26,12 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency 'acts-as-taggable-on', '~> 7.0'
-  spec.add_dependency 'ckeditor'
+  spec.add_dependency 'bootstrap', '~> 4.6'
+  spec.add_dependency 'ckeditor', '~> 5.1'
+  spec.add_dependency 'jquery-rails', '~> 4.3'
+  spec.add_dependency 'mini_magick', '~> 4.11'
   spec.add_dependency "rails", "~> 6.0.3", ">= 6.0.3.6"
+  spec.add_dependency 'will_paginate', '~> 3.3'
 
   spec.add_development_dependency "sqlite3"
 end
