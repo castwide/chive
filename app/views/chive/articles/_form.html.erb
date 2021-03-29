@@ -61,12 +61,10 @@
             </label>
           </div>
         </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="custom-file">
-              <%= f.file_field :image, class: 'image-upload custom-file-input', data: {preview: '.image-preview', delete: '.delete-preview' } %>
-              <%= f.label :image, 'Choose file', class: 'custom-file-label' %>
-            </div>
+        <div class="input-group">
+          <div class="custom-file">
+            <%= f.file_field :image, class: 'image-upload custom-file-input', data: {preview: '.image-preview', delete: '.delete-preview' } %>
+            <%= f.label :image, 'Choose file', class: 'custom-file-label' %>
           </div>
         </div>
       </div>
