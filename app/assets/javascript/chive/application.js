@@ -11,7 +11,7 @@
  * 
  * Example:
  * 
- * <%= image_tag 'chive/blank', class: 'image-preview' %>
+ * <%= image_tag 'blank', class: 'image-preview' %>
  * <%= check_box_tag :delete_preview, 'delete', false, class: 'delete-preview' %>
  * <%= f.file_field :image, class: 'image-upload', data: {preview: '.image-preview', delete: '.delete-preview' } %>
  */

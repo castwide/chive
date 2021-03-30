@@ -40,7 +40,7 @@
         <%= f.label :image %>
         <div class="image-previews">
           <div class="image-container">
-            <%= image_tag 'chive/no-image', class: 'align-middle' %>
+            <img src="/assets/chive/no-image.png" class="align-middle" />
           </div>
           <div>
             <% if @article.image.attached? %>
@@ -54,7 +54,7 @@
           </div>
           <div>
             <div class="image-container">
-              <%= image_tag 'chive/blank', class: 'image-preview' %>
+              <img src="/assets/chive/blank.png" class="image-preview" />
             </div>
             <label class="delete-preview">
               <%= check_box_tag :delete_preview, 'delete', false %>
