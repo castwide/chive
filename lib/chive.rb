@@ -42,5 +42,11 @@ module Chive
     def public_layout
       @public_layout ||= 'chive/application'
     end
+
+    attr_writer :per_page
+
+    def per_page
+      @per_page ||= 10
+    end
   end
 end

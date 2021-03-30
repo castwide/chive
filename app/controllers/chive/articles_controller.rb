@@ -15,7 +15,7 @@ module Chive
         Article.latest
       else
         Article.latest_published
-      end.paginate(page: params[:page])
+      end.paginate(page: params[:page], per_page: Chive.per_page)
     end
 
     # GET /articles/1
