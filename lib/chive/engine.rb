@@ -8,6 +8,16 @@ module Chive
       app.config.assets.precompile += fetch_asset_names
     end
 
+    rake_tasks do
+      load Chive::Engine.root.join('lib', 'tasks', 'chive_tasks.rake')
+
+      if Rake::Task.task_defined?('assets:precompile')
+        Rake::Task['assets:precompile'].enhance do
+          Rake::Task['chive:public_assets'].invoke
+        end
+      end
+    end
+
     private
 
     def fetch_asset_names
