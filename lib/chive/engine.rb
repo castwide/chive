@@ -4,7 +4,7 @@ module Chive
   class Engine < ::Rails::Engine
     isolate_namespace Chive
 
-    initializer 'chive.assets' do |app|
+    initializer 'chive.assets.precompile' do |app|
       app.config.assets.precompile += fetch_asset_names
     end
 
