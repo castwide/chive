@@ -125,8 +125,15 @@ end
 You can make the blog your home page by changing the `Chive::Engine` path to `/`:
 
 ```ruby
-mount Chive::Engine => "/"
+Rails.application.routes.draw do
+
+  # Your other routes
+
+  mount Chive::Engine => '/'
+end
 ```
+
+If you mount the engine on the home page, make sure it's the last route you define. Otherwise `Chive::Engine#index` will process all your website's paths before the other routes have a chance to evaluate them.
 
 ## Customizing the Layout
 
