@@ -4,7 +4,7 @@
   <div class="row">
     <nav class="col text-right">
       <%= f.submit 'Save', class: 'btn btn-primary' %>
-      <%= link_to 'Cancel', articles_path, class: 'btn btn-secondary' %>
+      <%= link_to 'Cancel', @article, class: 'btn btn-secondary' %>
       <% if params[:action] == 'edit' %>
         <%= link_to "Delete", '#', class: 'btn btn-outline-danger', data: { toggle: 'modal', target: '#delete-modal' } %>
         <%= render partial: 'delete_modal' %>
