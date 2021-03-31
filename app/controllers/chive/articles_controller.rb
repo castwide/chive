@@ -11,7 +11,7 @@ module Chive
     # GET /articles
     # GET /articles.json
     def index
-      @articles = if (chive_user || Rails.env.development?) && !params.key?(:public)
+      @articles = if user_can_chive? && !params.key?(:public)
         Article.latest
       else
         Article.latest_published

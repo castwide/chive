@@ -1,6 +1,10 @@
 module Chive
   module UserConcerns
-    extended ActiveSupport::Concern
+    extend ActiveSupport::Concern
+
+    included do
+      helper_method :user_can_chive?
+    end
 
     def authenticate_chive_user
       if Chive.use_devise?
@@ -15,6 +19,14 @@ module Chive
 
     def chive_user
       send("current_#{Chive.user_model.underscore}") if Chive.use_devise?
+    end
+
+    def user_can_chive?
+      if Chive.use_devise?
+        user_signed_in?
+      else
+        Rails.env.development?
+      end
     end
   end
 end
