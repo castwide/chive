@@ -43,6 +43,10 @@ module Chive
       @public_layout ||= 'chive/application'
     end
 
+    def slug_formatter &block
+      @slug_formatter = block
+    end
+
     attr_writer :per_page
 
     def per_page

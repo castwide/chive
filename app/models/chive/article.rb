@@ -7,6 +7,12 @@ module Chive
 
     acts_as_taggable_on :tags
 
+    before_validation :set_slug
+
+    validates :title, presence: true
+
+    validates :slug, presence: true, uniqueness: true
+
     def byline
       return custom_byline if custom_byline.present?
       return real_author_name if real_author_name.present?
@@ -31,6 +37,14 @@ module Chive
 
     def public?
       self.status == 'publish' && !expired?
+    end
+
+    def to_param
+      slug
+    end
+
+    def set_slug
+      self.slug = Chive.slug_formatter&.call(self) || self.title.parameterize if slug.nil?
     end
 
     def self.latest
