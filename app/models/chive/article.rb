@@ -7,13 +7,13 @@ module Chive
 
     acts_as_taggable_on :tags
 
-    before_validation :set_slug
-
-    validate :valid_status
-
     validates :title, presence: true
 
+    before_validation :set_slug
+    validate :slug_is_parameter
     validates :slug, presence: true, uniqueness: true
+
+    validate :valid_status
 
     def byline
       return custom_byline if custom_byline.present?
@@ -62,6 +62,10 @@ module Chive
 
     def valid_status
       errors.add(:status, :invalid) unless ['publish', 'draft'].include?(status)
+    end
+
+    def slug_is_parameter
+      errors.add(:slug, 'must be a valid parameter') unless slug.parameterize == slug
     end
   end
 end
