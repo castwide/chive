@@ -15,7 +15,7 @@ if Rails.env.development?
       <p>This is an example article created by the development seeds (db/seeds.rb).</p>
     ),
     author: user,
-    status: 'published',
+    status: 'publish',
     published_at: DateTime.now
   )
 end
