@@ -46,7 +46,7 @@ module Chive
     end
 
     def set_slug
-      self.slug = Chive.slug_formatter&.call(self) || self.title.parameterize if slug.nil?
+      self.slug = Chive.slug_formatter.call(self) unless slug.present?
     end
 
     def self.latest

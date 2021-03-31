@@ -43,8 +43,10 @@ module Chive
       @public_layout ||= 'chive/application'
     end
 
-    def slug_formatter &block
-      @slug_formatter = block
+    attr_writer :slug_formatter
+
+    def slug_formatter
+      @slug_formatter ||= proc { |article| article.title.parameterize }
     end
 
     attr_writer :per_page
