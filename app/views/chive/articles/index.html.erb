@@ -1,21 +1,26 @@
 <section>
-  <nav class="header-nav float-right">
-    <% if user_can_chive? %>
-      <%= link_to "New Article", new_article_path, class: 'btn btn-outline-primary' %>
-    <% end %>
-  </nav>
+  <% if user_can_chive? %>
+    <div class="row">
+      <nav class="col text-right">
+        <%= link_to "New Article", new_article_path, class: 'btn btn-outline-primary' %>
+      </nav>
+    </div>
+  <% end %>
+
+  <%= render 'pagination' %>
 
   <% @articles.each do |article| %>
+    <div class="row mb-4">
+    </div>
     <article>
       <h2 class="large"><%= link_to article.title, article_path(article) %></h2>
       <address>by <%= article.byline %> on <%= article.published_at %></address>
       <p>
     		<%= raw article.summary %>
-		    <%= link_to 'Read More', article_path(article) %>
 	    </p>
+      <%= render 'chive/articles/status', article: article %>
     </article>
   <% end %>
-  <div class="digg_pagination">
-    <%= will_paginate @articles, page_links: false, previous_label: '« Newer', next_label: 'Older »' %>
-  </div>
+  
+  <%= render 'pagination' %>
 </section>

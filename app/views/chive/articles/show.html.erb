@@ -17,6 +17,7 @@
         <p>
           <small><%= @article.tag_list.to_s %></small>
         </p>
+        <%= render 'chive/articles/status', article: @article %>
       </div>
     </div>
     <div class="row">

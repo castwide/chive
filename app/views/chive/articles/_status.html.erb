@@ -1,0 +1,16 @@
+<% if user_can_chive? %>
+  <p>
+    <% if article.draft? %><span class="badge badge-info">Draft</span><% end %>
+    <% if article.expired? %><span class="badge badge-info">Expired</span><% end %>
+    <% unless article.public? %>
+      <% if chive_user %>
+        <span class="badge badge-info">Visible to authors</span>
+      <% elsif Rails.env.development? %>
+        <span class="badge badge-info">Visible in development</span>
+      <% end %>
+    <% end %>
+    <% if !article.draft? && !article.public? %>
+      <span class="badge badge-danger">Status: <%= article.status %></span>
+    <% end %>
+  </p>
+<% end %>
