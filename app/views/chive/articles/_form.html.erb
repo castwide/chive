@@ -2,10 +2,7 @@
 
 <%= form_for @article, html: { multipart: true } do |f| %>
   <div class="row">
-    <div class="col">
-      <h1><%= params[:action].capitalize %> Article</h1>
-    </div>
-    <nav class="col header-nav">
+    <nav class="col text-right">
       <%= f.submit 'Save', class: 'btn btn-primary' %>
       <%= link_to 'Cancel', articles_path, class: 'btn btn-secondary' %>
       <% if params[:action] == 'edit' %>
@@ -13,6 +10,11 @@
         <%= render partial: 'delete_modal' %>
       <% end %>
     </nav>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h1><%= params[:action].capitalize %> Article</h1>
+    </div>
   </div>
   <% if @article.errors.any? %>
     <div id="error_explanation">
