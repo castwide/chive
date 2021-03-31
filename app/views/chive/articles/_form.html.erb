@@ -49,7 +49,7 @@
               <div class="image-container">
                 <%= image_tag @article.image.variant(resize: '250x250'), class: 'attached-image' if @article.image.attached? %>
               </div>
-              <label class="delete-image">
+              <label class="delete-image btn">
                 <%= check_box_tag :delete_image, @article.image.id, false %>
               </label>
             <% end %>
@@ -58,7 +58,7 @@
             <div class="image-container">
               <img src="/assets/chive/blank.png" class="image-preview" />
             </div>
-            <label class="delete-preview">
+            <label class="delete-preview btn">
               <%= check_box_tag :delete_preview, 'delete', false %>
             </label>
           </div>
