@@ -21,6 +21,7 @@ module Chive
     # GET /articles/1
     # GET /articles/1.json
     def show
+      raise ActionController::RoutingError.new('Not Found') unless @article
     end
 
     # GET /articles/new
