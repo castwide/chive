@@ -9,6 +9,8 @@ module Chive
 
     before_validation :set_slug
 
+    validate :valid_status
+
     validates :title, presence: true
 
     validates :slug, presence: true, uniqueness: true
@@ -54,6 +56,12 @@ module Chive
     def self.latest_published
       now = DateTime.now
       latest.where('published_at <= ? AND (expired_at >= ? OR expired_at IS NULL) AND status = ?', now, now, 'publish')
+    end
+
+    private
+
+    def valid_status
+      errors.add(:status, :invalid) unless ['publish', 'draft'].include?(status)
     end
   end
 end
