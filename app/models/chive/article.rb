@@ -22,6 +22,15 @@ module Chive
     end
 
     def published?
+      self.status == 'publish'
+    end
+
+    def draft?
+      self.status == 'draft'
+    end
+
+    def public?
+      self.status == 'publish' && !expired?
     end
 
     def self.latest
