@@ -44,4 +44,14 @@ namespace :chive do
       end
     end
   end
+
+  desc 'Rewrite article slugs'
+  task slugs: :environment do
+    Chive::Article.all.each do |article|
+      rewrite = Chive.slug_formatter.call(article)
+      puts "#{article.slug} -> #{rewrite}"
+      article.slug = rewrite
+      article.save!
+    end
+  end
 end
