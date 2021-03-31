@@ -16,8 +16,8 @@ Generate migrations for Chive.
           .map { |f| File.basename(f) }
           .each do |src|
             title = src.gsub /^[0-9]+_/, ''
-            migration_template src, "db/migrate/#{title}", {
-              migration_file_name: File.basename(src, '.rb')
+            migration_template src, "db/migrate/#{title}.rb", {
+              migration_file_name: "#{File.basename(src, '.rb')}"
             }
           end
       end
