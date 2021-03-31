@@ -175,3 +175,13 @@ end
 The `only: [:index, :show]` option limits the resource to the public pages.
 
 Now you can make your own views at `app/views/blog/index.html.erb` and `app/views/blog/show.html.erb`.
+
+## Third-Party Libraries
+
+Chive uses the following libraries and plugins:
+
+- acts-as-taggable-on
+- bootstrap
+- ckeditor
+- jquery-rails
+- will_paginate
