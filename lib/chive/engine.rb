@@ -8,6 +8,8 @@ module Chive
       app.config.assets.precompile += fetch_asset_names
     end
 
+    # Enhance the assets:precompile task with the chive:public_assets task to
+    # ensure that the main app can access this engine's assets in production.
     rake_tasks do
       load Chive::Engine.root.join('lib', 'tasks', 'chive_tasks.rake')
 

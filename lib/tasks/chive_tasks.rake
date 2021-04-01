@@ -30,7 +30,10 @@ namespace :chive do
     sh 'rails generate chive:initializer --devise'
   end
 
-  desc 'Create public versions of chive assets'
+  # This task is necessary to ensure that Chive's compiled assets are
+  # available from the main app in production. the CKEditor gem performs a
+  # similar operation.
+  desc 'Create public versions of Chive assets'
   task public_assets: :environment do
     fingerprint = /\-[0-9a-f]{32,64}\./
     path = Rails.root.join('public', 'assets', 'chive', '**', '*')
