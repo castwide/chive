@@ -4,6 +4,7 @@ module Chive
 
     included do
       helper_method :user_can_chive?
+      helper_method :chive_user
     end
 
     def authenticate_chive_user

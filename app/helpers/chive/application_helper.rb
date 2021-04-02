@@ -1,9 +1,5 @@
 module Chive
   module ApplicationHelper
-    def chive_user
-      send("current_#{Chive.user_model.underscore}") if Chive.use_devise?
-    end
-
     # Needed to fix polymorphic_mappings.
     # @see https://github.com/rails/rails/issues/31325#issuecomment-560135329
     def method_missing(method, *args, &block)
