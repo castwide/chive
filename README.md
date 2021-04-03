@@ -180,8 +180,13 @@ Now you can make your own views at `app/views/blog/index.html.erb` and `app/view
 
 Chive uses the following libraries and plugins:
 
-- acts-as-taggable-on
-- bootstrap
-- ckeditor
-- jquery-rails
-- will_paginate
+- [acts-as-taggable-on](https://github.com/mbleigh/acts-as-taggable-on)
+- [bootstrap](https://github.com/twbs/bootstrap-rubygem)
+- [ckeditor](https://github.com/galetahub/ckeditor)jq
+- [jquery-rails](https://github.com/rails/jquery-rails)
+- [will_paginate](https://github.com/mislav/will_paginate)
+
+## Sites Using Chive
+
+- [gamefic.com](https://gamefic.com)
+- [moviecrank.com](https://moviecrank.com)
