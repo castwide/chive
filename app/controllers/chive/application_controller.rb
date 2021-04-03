@@ -6,7 +6,7 @@ module Chive
 
     protect_from_forgery with: :exception
 
-    after_action :store_action
+    after_action(:store_action) if Chive.use_devise?
 
     # Needed to fix polymorphic_mappings.
     # @see https://github.com/rails/rails/issues/31325#issuecomment-560135329
