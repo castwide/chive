@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_134006) do
+ActiveRecord::Schema.define(version: 2021_04_03_192257) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(version: 2021_03_27_134006) do
     t.datetime "expired_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_chive_articles_on_author_id"
+    t.index ["expired_at"], name: "index_chive_articles_on_expired_at"
+    t.index ["published_at"], name: "index_chive_articles_on_published_at"
+    t.index ["slug"], name: "index_chive_articles_on_slug", unique: true
+    t.index ["status"], name: "index_chive_articles_on_status"
   end
 
   create_table "ckeditor_assets", force: :cascade do |t|

@@ -26,6 +26,8 @@ Ckeditor.setup do |config|
   # Setup authorization to be run as a before filter
   # By default: there is no authorization.
   # config.authorize_with :cancancan
+  # This setting uses Chive's default authorization.
+  config.authorize_with :chive
 
   # Override parent controller CKEditor inherits from
   # By default: 'ApplicationController'
