@@ -99,11 +99,11 @@
     </div>
     <div class="form-group col-sm-4">
       <%= f.label :published_at, 'Publish Date' %>
-      <%= f.datetime_field :published_at, class: 'form-control datepicker-field' %>
+      <%= f.text_field :published_at, class: 'form-control flatpickr-datetime' %>
     </div>
     <div class="form-group col-sm-4">
       <%= f.label :exipred_at, 'Expire Date' %>
-      <%= f.datetime_field :expired_at, class: 'form-control datepicker-field' %>
+      <%= f.text_field :expired_at, class: 'form-control flatpickr-datetime' %>
     </div>
   </div>
 <% end %>

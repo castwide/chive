@@ -6,6 +6,8 @@
 //= require popper
 //= require bootstrap-sprockets
 
+//= require flatpickr
+
 /**
  * Preview an image before upload
  * 
@@ -68,4 +70,9 @@ $(function () {
       $('.attached-image').parent().show();
     }
   });
+});
+
+$(function () {
+  flatpickr('.flatpickr-date');
+  flatpickr('.flatpickr-datetime', { enableTime: true });
 });
