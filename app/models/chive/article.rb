@@ -15,6 +15,8 @@ module Chive
 
     validate :valid_status
 
+    before_save :maybe_summarize
+
     def byline
       return custom_byline if custom_byline.present?
       return real_author_name if real_author_name.present?
@@ -66,6 +68,18 @@ module Chive
 
     def slug_is_parameter
       errors.add(:slug, 'must be a valid parameter') unless slug.parameterize == slug
+    end
+
+    def maybe_summarize
+      return unless autosummary
+      self.summary = summarize_body
+    end
+
+    def summarize_body
+      doc = Nokogiri::HTML.parse(body)
+      paras = doc.css('p')
+      return if paras.empty? || paras.one?
+      paras.first.text
     end
   end
 end
