@@ -1,4 +1,4 @@
-## 0.2.0
+## 0.2.0 - March 26, 2022
 - Generate public versions of precompiled assets
 - Configurable page length
 - Feed controller
@@ -8,8 +8,9 @@
 - Miscellaneous UX fixes
 - Index commonly queried article columns
 - Use flatpickr for date/time pickers
+- Enable autosummary
 
-## 0.1.1 - Marchi 29. 2021
+## 0.1.1 - March 29. 2021
 - Add templates directory
 
 ## 0.1.0 - March 29, 2021
