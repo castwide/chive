@@ -11,8 +11,6 @@ module Chive
     # Enhance the assets:precompile task with the chive:public_assets task to
     # ensure that the main app can access this engine's assets in production.
     rake_tasks do
-      load Chive::Engine.root.join('lib', 'tasks', 'chive_tasks.rake')
-
       if Rake::Task.task_defined?('assets:precompile')
         Rake::Task['assets:precompile'].enhance do
           Rake::Task['chive:public_assets'].invoke
