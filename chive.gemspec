@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'acts-as-taggable-on', '~> 7.0'
   spec.add_dependency 'bootstrap', '~> 4.6'
   spec.add_dependency 'ckeditor', '~> 5.1'
+  spec.add_dependency 'flatpickr', '~> 4.6'
   spec.add_dependency 'jquery-rails', '~> 4.3'
   spec.add_dependency 'mini_magick', '~> 4.11'
   spec.add_dependency "rails", "~> 6.0", ">= 6.0.3.6"

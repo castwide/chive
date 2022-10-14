@@ -25,7 +25,8 @@ module Chive
         Chive::Engine.root, 'app', 'assets', 'images', 'chive', '*'
         )].map { |f| "chive/#{File.basename(f)}" } +
         ['chive/application.css', 'chive/application.js'] +
-        ['ckeditor/application.js', 'ckeditor/application.css', 'ckeditor/config.js']
+        ['ckeditor/application.js', 'ckeditor/application.css', 'ckeditor/config.js'] +
+        ['flatpickr.js', 'flatpickr.css']
     end
   end
 end
