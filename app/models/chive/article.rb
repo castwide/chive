@@ -27,6 +27,10 @@ module Chive
       author.present? && author.send(Chive.user_name_attr)
     end
 
+    def pending?
+      published_at > DateTime.now
+    end
+
     def expired?
       expired_at && expired_at <= DateTime.now
     end
@@ -40,7 +44,7 @@ module Chive
     end
 
     def public?
-      self.status == 'publish' && !expired?
+      self.status == 'publish' && !pending? && !expired?
     end
 
     def to_param
