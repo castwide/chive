@@ -52,7 +52,7 @@ module Chive
     end
 
     def set_slug
-      self.slug = Chive.slug_formatter.call(self) if slug.blank?
+      self.slug ||= Chive.slug_formatter.call(self)
     end
 
     def self.latest

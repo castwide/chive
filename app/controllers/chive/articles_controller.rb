@@ -86,7 +86,7 @@ module Chive
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params[:article].permit(:title, :body, :custom_byline, :autosummary, :summary, :published_at, :expired_at, :status, :tag_list, :image)
+      params[:article].permit(:title, :slug, :body, :custom_byline, :autosummary, :summary, :published_at, :expired_at, :status, :tag_list, :image)
     end
   end
 end
